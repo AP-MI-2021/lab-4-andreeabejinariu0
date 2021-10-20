@@ -1,5 +1,9 @@
 
 def citire_lista():
+    '''
+    Citeste o lista
+    :return: lista
+    '''
     lista = []
     string_lista = input("Introduceti lista: ")
     string_elemente = string_lista.split(sep=" ")
@@ -9,6 +13,11 @@ def citire_lista():
     return lista
 
 def get_nr_pare(lista):
+    '''
+    Calculeaza numarul elementelor pare din lista
+    :param lista: lista in care se cauta
+    :return: numarul de elemente pare
+    '''
     nr = 0
     for i in range(0, len(lista)):
         if lista[i] % 2 == 0:
@@ -17,12 +26,24 @@ def get_nr_pare(lista):
     return nr
 
 def get_same_nr_par(lista1, lista2):
+    '''
+    Verifica daca listele au acelasi numar de elemente pare
+    :param lista1: prima lista
+    :param lista2: a doua lista
+    :return: rezultatul verificarii
+    '''
     if get_nr_pare(lista1) == get_nr_pare(lista2):
         return True
     else:
         return False
 
 def get_intersectie(lista1, lista2):
+    '''
+    Gaseste si returneaza intersectia celor doua liste
+    :param lista1: prima lista
+    :param lista2: a doua lista
+    :return: intersectia celor doua
+    '''
     intersectie = []
     dict_count = {}
     for element in lista1:
@@ -37,6 +58,43 @@ def get_intersectie(lista1, lista2):
             dict_count[element2] -= 1
 
     return intersectie
+
+def get_oglindit(nr):
+    '''
+    Cauta oglinditul unui numar
+    :param nr: numarul
+    :return: oglinditul
+    '''
+    oglindit = 0
+
+    while nr > 0:
+        oglindit = oglindit * 10 + nr % 10
+        nr = nr // 10
+
+    return oglindit
+
+
+def is_palindrome(nr):
+    '''
+    Verifica daca numarul este palindrom
+    :param nr: numarul
+    :return: rezultatul verificarii
+    '''
+    oglindit = get_oglindit(nr)
+    return oglindit == nr
+
+def if_concat_is_palindrom(lista1,lista2):
+    '''
+    Verifica daca concatenarea elementelor de pe aceeasi pozitie este palindrom
+    :param lista1: prima lista
+    :param lista2: a doua lista
+    :return: lista palindromelor
+    '''
+    rezultat = []
+    for i in range(0,len(lista1)):
+        if is_palindrome(int(str(lista1[i])+ str(lista2[i]))):
+            rezultat.append(is_palindrome(int(str(lista1[i])+ str(lista2[i]))))
+    return rezultat
 
 def main():
     while(True):
@@ -54,7 +112,7 @@ def main():
         elif optiune == "3":
             print(get_intersectie(lista1, lista2))
         elif optiune == "4":
-            
+            print(if_concat_is_palindrom(lista1, lista2))
         elif optiune == "x":
             break
 
